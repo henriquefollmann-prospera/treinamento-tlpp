@@ -1,0 +1,18 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+Class StaticMethod
+    Static Method StaticMethod01()
+EndClass
+
+Method StaticMethod01() Class StaticMethod
+    FwAlertInfo('Este metodo estatico esta sendo executado por um fonte diferente do qual foi declarado', 'Metodo Estatico')
+Return
+
+Class FunPCP
+    Static Method EstornaApontamentoOPPrototipo()
+EndClass
+
+Method EstornaApontamentoOPPrototipo() Class FunPCP
+    FwAlertInfo('Esta funcao do PCP esta sendo chamada de outro fonte e estornando os apontamentos de uma OP de prototipo', 'Metodo estatico')
+Return

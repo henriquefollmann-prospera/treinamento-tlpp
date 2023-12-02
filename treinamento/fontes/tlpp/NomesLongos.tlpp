@@ -1,0 +1,30 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+User Function NomesLongos()
+
+    EssaFuncaoTemUmNomeMuitoLongo01()
+    EssaFuncaoTemUmNomeMuitoLongo02()
+    EssaFuncaoTemUmNomeMuitoLongo03('Texto como parametro 1', 'Outro texto como parametro 2')
+
+Return
+
+Static Function EssaFuncaoTemUmNomeMuitoLongo01()
+
+    FwAlertInfo('EssaFuncaoTemUmNomeMuitoLongo01', 'Nomes Longos')
+
+Return
+
+Static Function EssaFuncaoTemUmNomeMuitoLongo02()
+
+    FwAlertInfo('EssaFuncaoTemUmNomeMuitoLongo02', 'Nomes Longos')
+    
+Return
+
+Static Function EssaFuncaoTemUmNomeMuitoLongo03(cParametroLongoDaMesmaForma01, cParametroLongoDaMesmaForma02)
+
+    FwAlertInfo(cParametroLongoDaMesmaForma01, 'Nomes Longos')
+
+    FwAlertInfo(cParametroLongoDaMesmaForma02, 'Nomes Longos')
+    
+Return

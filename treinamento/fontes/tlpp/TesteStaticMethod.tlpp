@@ -1,0 +1,8 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+User Function TesteStaticMethod()
+    FunPCP():EstornaApontamentoOPPrototipo()
+
+    StaticMethod():StaticMethod01()
+Return

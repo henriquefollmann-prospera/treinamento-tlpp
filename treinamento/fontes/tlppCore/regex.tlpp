@@ -1,0 +1,35 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+
+User Function Regex()
+    Local oRegex := tlpp.regex.Regex():New('23')
+    Local nOcorrencias As Numeric
+
+    ValidaEmail()
+
+    nOcorrencias := oRegex:Count('1523486215913229513558489213848321352418631,32186978921322158978621236418681313222323232032132131321356547981')
+
+    FwAlertInfo('Numero de Ocorrencias: ' + Str(nOcorrencias), 'Regex')    
+
+Return
+
+Static Function ValidaEmail()
+
+    Local cEmail := 'teste@teste.com'
+
+    If tlpp.regex.Regex():IsEmail(cEmail)
+        FwAlertInfo(cEmail + ' é um endereço de email', 'Regex')
+    Else
+        FwAlertInfo(cEmail + ' não é um endereço de email', 'Regex')
+    EndIf
+
+    cEmail := 'avocado22@teste@com'
+
+    If tlpp.regex.Regex():IsEmail(cEmail)
+        FwAlertInfo(cEmail + ' é um endereço de email', 'Regex')
+    Else
+        FwAlertInfo(cEmail + ' não é um endereço de email', 'Regex')
+    EndIf
+
+Return

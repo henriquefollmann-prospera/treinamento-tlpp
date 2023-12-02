@@ -1,0 +1,32 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+User Function Tipagem()
+    
+    Local nNumerico As Numeric
+    Local cCharacter As Character
+    Local iInteger As Integer
+    Local dDate As Date
+
+    If nNumerico == 0
+        FwAlertInfo('nNumerico inicializado com 0', 'Tipagem')
+    EndIf
+
+    If iInteger == 0
+        FwAlertInfo('iInteger inicializado com 0', 'Tipagem')
+    EndIf
+
+    If cCharacter == ''
+        FwAlertInfo('cCharacter inicializado com ""', 'Tipagem')
+    EndIf
+
+    If dDate == StoD('18991231')
+        FwAlertInfo('dDate inicializado com 31/12/1899', 'Tipagem')
+    EndIf
+
+    // TipagemDeParametros(cCharacter, nNumerico)
+
+Return
+
+Static Function TipagemDeParametros(cPar01 As Character, cPar02 As Character, nPar03 As Numeric)
+Return

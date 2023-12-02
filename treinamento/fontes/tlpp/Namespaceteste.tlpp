@@ -1,0 +1,13 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+User Function Namespace()
+    Local cEmpAnt := '02' 
+
+    If cEmpAnt == '01'
+        Empresa01.U_PrintNamespace()
+    Else
+        Empresa02.U_PrintNamespace()
+    EndIf
+
+Return

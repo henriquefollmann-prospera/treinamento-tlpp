@@ -1,0 +1,99 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+@Get('/clientes/:id')
+User Function GetClientes()
+    //Auxiliares
+    Local nStatusCode := 200 As Numeric
+    Local cMessage As Character
+    Local jMessage As Json
+
+    //Tratamento de erro
+    Private oVarError := ErrorClass():New()
+
+    //Partes da requisição
+    Private jPath As Json
+    Private jQuery As Json
+    Private jHeader As Json
+    Private cBody As Character
+    Private jBody As Json
+
+    //Busca os dados enviados pelo consumidor da API
+    jPath := oRest:GetPathParamsRequest()
+    cBody := oRest:GetBodyRequest()
+    jQuery := oRest:GetQueryRequest()
+    jHeader := oRest:GetHeaderRequest()
+
+    //Define o formato da resposta
+    oRest:SetKeyHeaderResponse('Content-Type', 'application/json')
+
+    Try
+        //Abre o ambiente
+        RpcSetEnv('99', '01')
+
+        //Valida se foi enviada a chave ID no path
+        If jPath:HasProperty('id')
+            //Posiciona no cliente
+            SA1->(DbSetOrder(1))
+            If SA1->(MsSeek(FwFilial('SA1') + jPath['id']))
+                //Monta o json com os dados do cliente
+                jMessage := GeraJsonCliente()
+                //Monta a resposta no formato texto
+                cMessage := jMessage:ToJson()
+            Else
+                //Monta a resposta
+                jMessage := {'status': 'Not found', 'message': 'cliente não encontrado'}
+                //Declara o erro
+                oVarError:GenCode := 404
+                oVarError:Description := jMessage:ToJson()
+                //Gera o erro
+                Throw oVarError
+            EndIf
+        Else
+            //Monta a resposta
+            jMessage := {'status': 'Bad Request', 'message': 'id não informado'}
+            //Declara o erro
+            oVarError:GenCode := 400
+            oVarError:Description := jMessage:ToJson()
+            //Gera o erro
+            Throw oVarError
+        EndIf
+    Catch oVarError
+        //Se o status de erro não foi definido gera erro 500
+        If Empty(oVarError:GenCode)
+            nStatusCode := 500
+        Else
+            nStatusCode := oVarError:GenCode
+        EndIf
+        //Responde a descrição do erro
+        cMessage := oVarError:Description
+        
+    Finally
+        //Define as respostas
+        oRest:SetStatusCode(nStatusCode)
+        oRest:SetFault(cMessage)
+
+    EndTry
+
+
+Return
+
+Static Function GeraJsonCliente()
+    Local iX As Integer
+    Local jDados := JsonObject():New()
+
+    //Carrega todos os campos da tabela
+    For iX := 1 To SA1->(FCount())
+        xConteudo := SA1->(FieldGet(iX))
+
+        If !Empty(xConteudo)
+            cNomeCampo := Lower(StrTran(SA1->(FieldName(iX)), 'A1_', ''))
+            If ValType(xConteudo) == 'C'
+                jDados[cNomeCampo] := AllTrim(xConteudo)
+            Else
+                jDados[cNomeCampo] := xConteudo
+            EndIf
+        EndIf
+    Next
+
+Return jDados

@@ -1,0 +1,8 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+User Function GeradorDeDocumentacao()
+    RpcSetEnv('99', '01')
+    tlpp.doc.generate( 'swagger', 'api_doc')
+    RpcClearEnv()
+Return

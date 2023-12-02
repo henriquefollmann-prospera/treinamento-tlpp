@@ -1,0 +1,8 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+Namespace Empresa01
+
+User Function PrintNamespace()
+    FwAlertInfo('Namespace: Empresa01', 'Namespace')
+Return

@@ -1,0 +1,26 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+User Function ParametrosNomeados()
+
+    Local cChar := 'Variavel Character' As Character
+    Local iInteiro := 1 As Integer
+    Local nNumerico := 1.01 As Numeric
+    Local dDate As Date
+
+    //Formato Antigo
+    Funcao1(cChar, iInteiro, nNumerico, , , , dDate)
+
+    //Novo formato
+    Funcao1(cChar, iInteiro, nNumerico, dPar08 = dDate)
+
+    Funcao1(iPar02 = iInteiro, nPar03 = nNumerico, cPar01 = cChar, dPar08 = dDate)
+
+Return
+
+Static Function Funcao1(cPar01, iPar02 , nPar03, cPar04, cPar05, cPar07, dPar08)
+    FwAlertInfo('Parametro 01: ' + cPar01, 'Parametros Nomeados')
+    FwAlertInfo('Parametro 02: ' + Str(iPar02), 'Parametros Nomeados')
+    FwAlertInfo('Parametro 03: ' + Str(nPar03), 'Parametros Nomeados')
+    FwAlertInfo('Parametro 08: ' + DToC(dPar08), 'Parametros Nomeados')
+Return

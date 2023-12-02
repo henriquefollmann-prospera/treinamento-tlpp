@@ -1,0 +1,63 @@
+#Include 'Totvs.ch'
+#Include 'tlpp-core.th'
+
+User Function TryCatch()
+    Local oVarErro := ErrorClass():New()
+
+    oVarErro:Description := 'Minha descrição customizada'
+
+    Try
+
+        c := '1'
+        c := 1 + c
+
+        Throw oVarErro
+
+        FwAlertInfo('Não deve passar por aqui', 'Try Catch')
+
+    Catch oVarErro
+        FwAlertWarning('Erro Capturado 1', 'Try Catch')
+        FwAlertWarning(oVarErro:Description, 'Try Catch')
+    EndTry
+
+    Try
+
+        GeraErro()
+
+        Throw oVarErro
+
+        FwAlertInfo('Não deve passar por aqui', 'Try Catch')
+
+    Catch oVarErro
+        FwAlertWarning('Erro Capturado 2', 'Try Catch')
+        FwAlertWarning(oVarErro:Description, 'Try Catch')
+    EndTry
+
+    Try
+
+        Throw oVarErro
+
+        FwAlertInfo('Não deve passar por aqui', 'Try Catch')
+
+    Catch oVarErro
+        FwAlertWarning('Erro Capturado 3', 'Try Catch')
+        FwAlertWarning(oVarErro:Description, 'Try Catch')
+    EndTry
+
+    Try
+
+        FwAlertInfo('Não gera erro', 'Try Catch')
+
+    Catch oVarErro
+        FwAlertWarning('Erro Capturado 4', 'Try Catch')
+        FwAlertWarning(oVarErro:Description, 'Try Catch')
+
+    Finally
+        FwAlertInfo('Sempre executado', 'Try Catch')
+    EndTry
+
+Return
+
+Static Function GeraErro()
+    Throw oVarErro
+Return
